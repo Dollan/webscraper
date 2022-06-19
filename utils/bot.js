@@ -10,6 +10,7 @@ class Bot {
         await page.click('[href="/test-sites/e-commerce/allinone/computers"]');
         await page.click('[href="/test-sites/e-commerce/allinone/computers/laptops"]');
         
+        // timeout para dar tempo de carregar a pagina
         await page.waitForTimeout(5000);
     
         //pega todas as informações dos notebooks, preço, nome e descrição e concatena tudo em uma string,  
@@ -23,6 +24,7 @@ class Bot {
         //filtra o array de notebooks para ter apenas os da lenovo, ele já veio ordenado por preço
         var TextFiltrado = text.filter(filtra);
 
+        //retorna uma objeto com os notebooks nome, preco e descricao
         return TextFiltrado.map(texto => {
             const splitedText = texto.substring(1).split('+');
             return {
