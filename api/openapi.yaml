@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: Teste Lenovo API
+  description: This is a simple API for integration with a web scraping bot.
+  contact:
+    email: andrepmac@hotmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /list:
+    get:
+      summary: Get the complete list of Lenovo Notebooks.
+      description: Retrieves the current list of Lenovo Notebooks for sale in ascending
+        order of price.
+      operationId: listGET
+      responses:
+        "200":
+          description: 'The Notebook list is returned. '
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200'
+                x-content-type: application/json
+        "204":
+          description: No content to return.
+        "500":
+          description: Internal server error. Returns a error message specifying what
+            happened.
+          content:
+            application/json:
+              schema:
+                type: string
+                description: A error message explaining what went wrong.
+                example: Error
+                x-content-type: application/json
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    inline_response_200:
+      type: object
+      properties:
+        nome:
+          type: string
+          description: The name of the Lenovo Notebook listed
+          example: Lenovo ThinkPad...'
+        descricao:
+          type: string
+          description: The description of the Lenovo Notebook listed
+          example: "Lenovo ThinkPad Yoga 370 Black, 13.3 FHD I…5-7200U, 8GB, 256GB\
+            \ SSD, 4G, Windows 10 Pro"
+        preco:
+          type: number
+          description: The price of the Lenovo Notebook listed
+          example: 1362.24
+      example:
+        preco: 1362.24
+        nome: Lenovo ThinkPad...'
+        descricao: "Lenovo ThinkPad Yoga 370 Black, 13.3 FHD I…5-7200U, 8GB, 256GB\
+          \ SSD, 4G, Windows 10 Pro"
